@@ -3,7 +3,7 @@
     <div class="recent-post-content">
       <div
         class="recent-post"
-        v-for="(blog, index) in blogs.slice(3)"
+        v-for="(blog, index) in blogs.slice(3,8)"
         :key="index"
         @click="$router.push('/blog/' + blog.id)"
       >
@@ -61,16 +61,28 @@ export default {
 }
 .tag-contain {
   width: 20%;
+  max-height: 1200px;
+  overflow-y: scroll;
   margin-top: 63px;
+  position: relative;
+}
+.tag-contain::-webkit-scrollbar {
+    display: none;
 }
 .tag-contain h4 {
+  position: sticky;
+  top: 0;
   font-weight: bold;
   font-size: 22px;
   line-height: 40px;
   color: #1c1c1c;
+  background-color: #ccc;
+  padding-left: 20px;
+  border-radius: 3px;
 }
 .list-tags {
   list-style: none;
+  padding-left: 20px;
 }
 .list-tags li {
   font-size: 19px;

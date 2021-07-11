@@ -17,6 +17,7 @@ export default {
   position: relative;
   width: 80%;
   margin: 0 auto;
+  max-height: 600px;
 }
 .article img {
   width: 100%;

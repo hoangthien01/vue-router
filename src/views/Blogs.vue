@@ -1,23 +1,22 @@
 <template>
   <div class="blogs-contain">
-    <slot>
-      <div
-        class="blog-item"
-        v-for="(blog, index) in blogs"
-        :key="index"
-        @click="$router.push('/blog/' + blog.id)"
-      >
-        <div class="image">
-          <img :src="blog.image" alt="" srcset="" />
-        </div>
-        <div class="blog-content">
-          <p class="head">{{ blog.head }}</p>
-          <h2 class="title">{{ blog.title }}</h2>
-          <p class="sub-title">{{ blog.subTitle }}</p>
-          <p class="description">{{ blog.description }}</p>
-        </div>
+    <div v-if="loading">Loading....</div>
+    <div v-else
+      class="blog-item"
+      v-for="(blog, index) in blogs"
+      :key="index"
+      @click="$router.push('/blog/' + blog.id)"
+    >
+      <div class="image">
+        <img :src="blog.image" alt="" srcset="" />
       </div>
-    </slot>
+      <div class="blog-content">
+        <p class="head">{{ blog.head }}</p>
+        <h2 class="title">{{ blog.title }}</h2>
+        <p class="sub-title">{{ blog.subTitle }}</p>
+        <p class="description">{{ blog.description }}</p>
+      </div>
+    </div>
     <pagination :totalPages="5" :maxVisiblePage="3"
       @pagechanged="onPageChange"
     ></pagination>
@@ -32,7 +31,8 @@ export default {
   data() {
     return {
       blogs: [],
-      currentPage: 1
+      currentPage: 1,
+      loading: true
     };
   },
   computed: {
@@ -47,19 +47,26 @@ export default {
     pagination
   },
   async created() {
-    const response = await 
-    axios.get(' http://localhost:3000/blogs?_start='+this.startPage+'&_end=' + this.endPage)
-    this.blogs = response.data
-    console.log(response)
+    try{
+      const response = await axios.get(' http://localhost:3000/blogs?_start='+this.startPage+'&_end=' + this.endPage )
+      this.blogs = response.data
+      this.loading= false
+    }
+    catch(error) {
+      console.log(error)
+    }
   },
   methods: {
     async onPageChange(page) {
-      console.log(page)
       this.currentPage = page
-      const response = await 
-      axios.get(' http://localhost:3000/blogs?_start='+this.startPage+'&_end=' + this.endPage)
-      this.blogs = response.data
-      console.log(response)
+      try {
+        const response = await 
+        axios.get(' http://localhost:3000/blogs?_start='+this.startPage+'&_end=' + this.endPage)
+        this.blogs = response.data
+      } 
+      catch(error) {
+        console.log(error)
+      }
     }
   }
 };
@@ -67,12 +74,12 @@ export default {
 
 <style scoped>
 .blogs-contain {
-  margin-top: 74px;
+  margin-top: 35px;
   padding: 0 130px 50px;
 }
 .blog-item {
   display: flex;
-  margin-top: 63px;
+  margin-bottom: 50px;
   cursor: pointer;
 }
 .blog-content {

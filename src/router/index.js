@@ -13,7 +13,7 @@ const routes = [
   },
   {
     path: "/",
-    name: "Home",
+    name: "home",
     component: () => import('../views/Home.vue'),
     meta: {
       layout: 'default'
@@ -21,7 +21,7 @@ const routes = [
   },
   {
     path: "/home",
-    name: "home",
+    name: "Home",
     component: () => import('../views/Home.vue'),
     meta: {
       layout: 'default'
@@ -48,6 +48,11 @@ const routes = [
   {
     path: '/blog/:id',
     component: () => import('../views/DetailBlog.vue'),
+  },
+  {
+    path: '/tags',
+    name: 'Tags',
+    component: () => import('../views/Tags.vue')
   },
   {
     // will match everything

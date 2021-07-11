@@ -9,20 +9,16 @@
       </div>
       <div class="nav-content animate__animated animate__fadeIn" ref="navbar">
         <ul>
-          <li @click="$router.push('/home')">Home</li>
-          <li @click="$router.push('/blogs')">Blogs</li>
-          <li @click="$router.push('/about')">About</li>
+          <li @click="homeClick" :class="{activeTab:tab === 'Home'}">Home</li>
+          <li @click="blogsClick" :class="{activeTab:tab === 'Blogs'}">Blogs</li>
+          <li @click="aboutClick" :class="{activeTab:tab === 'About'}">About</li>
+          <li @click="tagsClick" :class="{activeTab:tab === 'Tags'}">Tags</li>
         </ul>
       </div>
     </div>
     <div class="right-nav">
       <div class="search-contain">
-        <!-- <input
-          type="text"
-          class="search animate__animated animate__fadeIn"
-          v-show="typing"
-        /> -->
-        <i class="fas fa-search search-icon" @click="toggle"></i>
+        <i class="fas fa-search search-icon"></i>
       </div>
       <slot>
         <router-link to="/auth/login">
@@ -40,12 +36,25 @@ export default {
   name: "Nav",
   data() {
     return {
-      typing: false,
+      tab: 'Home'
     };
   },
   methods: {
-    toggle() {
-      this.typing = !this.typing;
+    homeClick() {
+      this.$router.push('/home')
+      this.tab = 'Home'
+    },
+     blogsClick() {
+      this.$router.push('/blogs')
+      this.tab = 'Blogs'
+    },
+    aboutClick() {
+      this.$router.push('/about')
+      this.tab = 'About'
+    },
+    tagsClick() {
+      this.$router.push('/tags')
+      this.tab = 'Tags'
     },
     showNavbar () {
       if(this.$refs.navbar.style.display === 'block') {
@@ -58,6 +67,9 @@ export default {
 </script>
 
 <style scoped>
+.activeTab {
+  font-weight: bold;
+}
 .nav {
   display: flex;
   justify-content: space-between;

@@ -29,10 +29,6 @@
         >
           Login
         </button>
-        <!-- <div class="more">
-          <a href=""><i class="fab fa-facebook-square"></i> Facebook</a>
-          <a href=""><i class="fab fa-google"></i>Google </a>
-        </div> -->
       </form>
     </div>
   </div>
@@ -121,28 +117,5 @@ export default {
 .btn-submit:hover {
   background-color: rgb(31, 46, 36);
   color: #fff;
-}
-.more {
-  margin-top: 15px;
-  display: flex;
-  height: 35px;
-  justify-content: space-between;
-}
-.more a {
-  display: block;
-  width: 47%;
-  height: 35px;
-  background-color: #1877f2;
-  border-radius: 5px;
-  color: #fff;
-  text-decoration: none;
-  font-size: 20px;
-}
-.more a:hover {
-  opacity: 0.9;
-}
-.more a i {
-  line-height: 35px;
-  margin-right: 10px;
 }
 </style>

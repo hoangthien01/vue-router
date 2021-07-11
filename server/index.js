@@ -4,7 +4,7 @@ module.exports = () => {
   for(let i=1; i<= 50; i++) {
     data.blogs.push({
       id:i,
-      head: faker.name.jobTitle(),
+      head: faker.hacker.noun(),
       title: faker.name.title(),
       image: faker.image.image(),
       subTitle: faker.lorem.sentence(),
