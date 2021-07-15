@@ -1,37 +1,51 @@
 <template>
   <div class="tags-contain">
-    <input type="text" placeholder="Find the topics you care about " class="form-control">
+    <input
+      type="text"
+      placeholder="Find the topics you care about "
+      v-model="searchInput"
+      class="form-control"
+    />
     <ul class="list-tags">
-      <li class="tag-item" v-for="(tag,index) in tags" :key="index">{{tag}}</li>
+      <li class="tag-item" v-for="(tag, index) in searchTag" :key="index">
+        {{ tag }}
+      </li>
     </ul>
   </div>
 </template>
 
 <script>
-import axios from 'axios'
+import axios from "axios";
 export default {
   data() {
     return {
+      searchInput: "",
       blogs: [],
-      tags: []
-    }
+      tags: [],
+    };
+  },
+  computed: {
+    searchTag() {
+      return this.tags.filter((tag) => {
+        return (tag.toLowerCase().includes(this.searchInput.toLowerCase()));
+      });
+    },
   },
   async created() {
-    try{
-      const response = await axios.get(' http://localhost:3000/blogs')
-      this.blogs = response.data
-      this.tags = this.blogs.map((blog)=> {
-        return blog.head
-      })
-    }
-    catch(error) {
-      console.log(error)
+    try {
+      const response = await axios.get(" http://localhost:3000/blogs");
+      this.blogs = response.data;
+      this.tags = this.blogs.map((blog) => {
+        return blog.head;
+      });
+    } catch (error) {
+      console.log(error);
     }
   },
-}
+};
 </script>
 
-<style scoped> 
+<style scoped>
 .tags-contain {
   padding: 120px 95px;
   text-align: center;
@@ -50,7 +64,7 @@ export default {
   list-style: none;
 }
 .tag-item {
-  margin:  7px;
+  margin: 7px;
   cursor: pointer;
   display: inline-block;
   padding: 7px 10px;

@@ -4,57 +4,69 @@
       <p><span>nu</span>ntium.</p>
     </div>
     <ul class="navigation">
-      <li>
-        <div class="image">
-          <img src="../../assets/image/grid1.png" alt="" srcset="" />
-        </div>
-        <span> Dashboard </span>
-      </li>
-      <li>
-        <div class="image">
-          <img src="../../assets/image/user.png" alt="" srcset="" />
-        </div>
-        <span> Profile </span>
-      </li>
-      <li>
-        <div class="image">
-          <img src="../../assets/image/edit.png" alt="" srcset="" />
-        </div>
-        <span> Write a Post </span>
-      </li>
-      <li>
-        <div class="image">
-          <img src="../../assets/image/book-open.png" alt="" srcset="" />
-        </div>
-        <span> All Posts </span>
-      </li>
-      <li>
-        <div class="image">
-          <img src="../../assets/image/box.png" alt="" srcset="" />
-        </div>
-        <span> Resources </span>
-      </li>
-      <li>
-        <div class="image">
-          <img src="../../assets/image/settings.png" alt="" srcset="" />
-        </div>
-        <span> Settings </span>
-      </li>
-      <li>
-        <div class="image">
-          <img src="../../assets/image/help-circle.png" alt="" srcset="" />
-        </div>
-        <span> Settings </span>
-      </li>
+      <treeFolder class="navigation-item" :data="item" v-for="(item,index) in treeData" :key="index">
+      </treeFolder>
     </ul>
     <button class="logout" @click="$router.push('/home')">Logout</button>
   </div>
 </template>
 
 <script>
+import treeFolder from "./Tree-folder.vue"
 export default {
   name: "Sidebar",
-};
+  data() {
+    return {
+      treeData : [
+                {
+                    content: 'Dashboard',
+                    image: require('../../assets/image/grid1.png'),
+                    child : [
+                    ],
+                },
+                {
+                    content: 'Profile',
+                    image: require('../../assets/image/user.png'),
+                    child: [
+                    ]
+                },
+                {
+                    content: 'Write a post',
+                    image: require('../../assets/image/edit.png'),
+                    child: [
+                    ]
+                },
+                {
+                    content: 'All Posts',
+                    image: require('../../assets/image/book-open.png'),
+                    child: [
+                    ]
+                },
+                 {
+                    content: 'Resources',
+                    image:require( '../../assets/image/box.png'),
+                    child: [
+                    ]
+                },
+                 {
+                    content: 'Settings',
+                    image: require('../../assets/image/settings.png'),
+                    child: [
+                    ]
+                },
+                 {
+                    content: 'Settings',
+                    image: require('../../assets/image/help-circle.png'),
+                    child: [
+                    ]
+                },
+            ]
+        }
+  },
+  components: {
+        treeFolder,
+  }
+}
 </script>
 
 <style scoped>
@@ -95,7 +107,7 @@ export default {
 .navigation {
   margin-top: 60px;
 }
-.navigation li {
+.navigation-item {
   font-size: 20px;
   line-height: 22px;
   padding: 17px 30px;
@@ -104,28 +116,16 @@ export default {
   align-items: center;
   cursor: pointer;
 }
-.navigation li:hover {
+.navigation-item:hover {
   background: #545a61;
 }
-.image {
-  display: inline-block;
-  width: 25px;
-  height: 25px;
-  object-fit: cover;
-}
-.image img {
-  width: 100%;
-}
 
-.navigation span {
-  margin-left: 10px;
-}
 .logout {
   background-color: transparent;
   width: 70px;
   height: 30px;
   right: 77.5px;
-  top: 580px;
+  top: 650px;
   position: absolute;
   color: #fff;
   font-size: 16px;
